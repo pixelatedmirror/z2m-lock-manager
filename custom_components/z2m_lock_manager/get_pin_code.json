@@ -1,0 +1,37 @@
+{
+    "action": null,
+    "action_source_name": null,
+    "action_user": null,
+    "auto_relock_time": 0,
+    "battery": 96,
+    "last_seen": "2022-10-05T14:46:28+11:00",
+    "linkquality": 255,
+    "lock_state": "locked",
+    "state": "LOCK",
+    "users":
+    {
+        "0":
+        {
+            "pin_code": "0000",
+            "status": "enabled"
+        },
+        "1":
+        {
+            "pin_code": "0000",
+            "status": "enabled"
+        },
+        "10":
+        {
+            "status": "available"
+        },
+        "11":
+        {
+            "status": "available"
+        },
+        "12":
+        {
+            "status": "available"
+        },
+        ...
+    }
+}

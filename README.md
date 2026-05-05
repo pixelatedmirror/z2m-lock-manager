@@ -16,11 +16,24 @@ A Home Assistant integration to manage PIN codes for Zigbee smart locks via Zigb
 
 ## Installation
 
+### Method 1: HACS (Recommended)
+
+1. Open HACS in your Home Assistant instance.
+2. Click on the 3 dots in the top right corner and select **Custom repositories**.
+3. Add the URL of this repository (`https://github.com/pixelatedmirror/z2m-lock-manager`) and select the category **Integration**.
+4. Click **Add** and then search for "Z2M Lock Manager" in HACS.
+5. Click **Download** and restart Home Assistant.
+6. Go to **Settings > Devices & Services**.
+7. Click **Add Integration** and search for "Z2M Lock Manager".
+8. Select your lock entity from the dropdown and specify the number of slots to manage.
+
+### Method 2: Manual Installation
+
 1.  Copy the `custom_components/z2m_lock_manager` directory to your Home Assistant `custom_components` folder.
 2.  Restart Home Assistant.
 3.  Go to **Settings > Devices & Services**.
-4.  Click **Add Integration** and search for "Zigbee2MQTT Lock Manager".
-5.  Enter your MQTT Root Topic (e.g., `zigbee2mqtt/front_door`) and the number of slots to manage.
+4.  Click **Add Integration** and search for "Z2M Lock Manager".
+5.  Select your lock entity from the dropdown and specify the number of slots to manage.
 6.  The "Lock Manager" item will appear in your sidebar.
 
 ## Usage
