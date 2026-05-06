@@ -388,6 +388,8 @@ class LockManager:
         if not slot["enabled"]:
             return False
             
+        # Ensure we are using the local timezone for time comparisons
+        local_now = dt_util.as_local(now)
         mode = slot.get("access_mode", MODE_ALWAYS)
         
         if mode == MODE_ALWAYS:
@@ -397,15 +399,15 @@ class LockManager:
             start = dt_util.parse_datetime(slot.get("start_date") or "")
             end = dt_util.parse_datetime(slot.get("end_date") or "")
             
-            if start and now < start:
+            if start and local_now < start:
                 return False
-            if end and now > end:
+            if end and local_now > end:
                 return False
             return True
             
         elif mode == MODE_RECURRING:
             # Check weekday
-            if slot.get("weekdays") and now.weekday() not in slot["weekdays"]:
+            if slot.get("weekdays") and local_now.weekday() not in slot["weekdays"]:
                 return False
             
             # Check time range
@@ -413,9 +415,15 @@ class LockManager:
             end_str = slot.get("daily_end_time")
             
             if start_str and end_str:
-                current_time = now.strftime("%H:%M")
-                if current_time < start_str or current_time > end_str:
-                    return False
+                current_time = local_now.strftime("%H:%M")
+                if start_str > end_str:
+                    # Overnight schedule (e.g., 22:00 to 06:00)
+                    if not (current_time >= start_str or current_time <= end_str):
+                        return False
+                else:
+                    # Normal schedule (e.g., 09:00 to 17:00)
+                    if current_time < start_str or current_time > end_str:
+                        return False
             
             return True
             
